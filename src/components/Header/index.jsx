@@ -3,7 +3,6 @@ import { AppBar, Box, Collapse, Divider, Drawer, IconButton, List, ListItem, Lis
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { useCategory } from "../../contexts/CategoryContext";
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -14,6 +13,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from "@mui/icons-material/Menu";
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+import { getCategories } from "../../services/CategoryService";
 
 export default function Header() {
 
@@ -23,7 +25,6 @@ export default function Header() {
     const [categories, setCategories] = useState([]);
 
     const navigate = useNavigate();
-    const { getCategories } = useCategory();
 
     useEffect(() => {
         async function get() {
@@ -66,6 +67,18 @@ export default function Header() {
                         <ListItemText primary="Buscar" />
                     </ListItemButton>
                 </ListItem>
+                {user ? (
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => handleNavigate("cart")}>
+                            <ListItemIcon>
+                                <ShoppingCartIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Carrinho" />
+                        </ListItemButton>
+                    </ListItem>
+                ) : (
+                    <></>
+                )}
 
                 <ListItemButton onClick={toggleProfileDrawer}>
                     <ListItemIcon>
@@ -151,6 +164,7 @@ export default function Header() {
 
                         <Box sx={{
                             display: { xs: "none", md: "flex" },
+                            alignItems: "center",
                             gap: 2,
                         }}>
                             <Link to={"/"}>
@@ -160,9 +174,18 @@ export default function Header() {
                                 <Typography variant="button"><b>Buscar</b></Typography>
                             </Link>
                             {user ? (
-                                <Link to={"/profile"}>
-                                    <Typography variant="button"><b>Perfil</b></Typography>
-                                </Link>
+                                <>
+                                    <Link to={"/profile"}>
+                                        <Typography variant="button"><b>Perfil</b></Typography>
+                                    </Link>
+                                    <Link to={"/cart"}>
+                                        <IconButton color="inherit">
+                                            <ShoppingCartIcon/>
+                                        </IconButton>
+                                    </Link>
+
+                                </>
+
                             ) : (
                                 <Link to={"/auth"}>
                                     <Typography variant="button"><b>Entrar</b></Typography>
