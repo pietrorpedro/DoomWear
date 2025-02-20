@@ -22,7 +22,6 @@ export default function Details() {
         const fetchDetails = async () => {
             const res = await getProduct(id);
             setProduct(res[0]);
-            console.log(res[0].id)
         }
 
         fetchDetails();

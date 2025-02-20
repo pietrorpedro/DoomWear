@@ -4,6 +4,7 @@ import Header from "./components/Header"
 import Auth from "./pages/Auth"
 import Cart from "./pages/Cart"
 import Category from "./pages/Category"
+import Delivery from "./pages/Delivery"
 import Details from "./pages/Details"
 import Home from "./pages/Home"
 import Payment from "./pages/Payment"
@@ -26,6 +27,7 @@ export default function AppRouter() {
                 </Route>
                 <Route element={<ProtectedRoute/>}>
                     <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/delivery" element={<Delivery/>}/>
                     <Route path="/payment" element={<Payment/>}/>
                 </Route>
             </Routes>

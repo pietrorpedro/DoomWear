@@ -19,7 +19,6 @@ export default function Cart() {
 
         setProducts(res)
         setTotalPrice(res.reduce((prev, product) => prev + product.total, 0))
-        console.log(res)
     }
 
     const handleChangeQty = async (qty, id, prevTotal, price) => {
@@ -134,9 +133,9 @@ export default function Cart() {
                                 <Button
                                     variant="contained"
                                     fullWidth
-                                    onClick={() => navigate("/payment")}
+                                    onClick={() => navigate("/delivery")}
                                 >
-                                    Ir para o pagamento
+                                    Ir para a entrega
                                 </Button>
                             </Box>
                         </Box>

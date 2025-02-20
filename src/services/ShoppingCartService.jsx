@@ -60,7 +60,7 @@ export const fetchProducts = async (user_id) => {
     try {
         const {data, error} = await supabase
             .from("shopping_cart")
-            .select("id, qty, total, product:products(name, price, stock_qty)")
+            .select("id, qty, total, product:products(id, name, price, stock_qty)")
             .eq("user_id", user_id);
 
             if (error) throw error;
